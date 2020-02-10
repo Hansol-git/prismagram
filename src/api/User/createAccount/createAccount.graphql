@@ -6,9 +6,5 @@ type Mutation {
     lastName: String
     bio: String
     avatar: String
-  ): User!
-}
-
-type Query {
-  something: String!
+  ): Boolean!
 }

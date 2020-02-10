@@ -7,9 +7,15 @@ export default {
       const { email } = args;
       const loginSecret = generateSecret();
       try {
-        await sendSecretMail(email, loginSecret); // send loginSecret first,
-        await prisma.updateUser({ data: { loginSecret }, where: { email } }); // then save the loginSecret into the User DB
-        return true;
+        // If existing email? check
+        const existingEmail = await prisma.$exists.user({ email });
+        if (existingEmail) {
+          await sendSecretMail(email, loginSecret); // send loginSecret first,
+          await prisma.updateUser({ data: { loginSecret }, where: { email } }); // then save the loginSecret into the User DB
+          return true;
+        } else {
+          return false;
+        }
       } catch {
         return false;
       }

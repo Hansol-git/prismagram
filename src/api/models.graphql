@@ -16,6 +16,9 @@ type User {
   comment: [Comment!]!
   rooms: [Room!]!
   loginSecret: String
+  postsCount: Int!
+  followingCount: Int!
+  followersCount: Int!
   createdAt: String
   updatedAt: String
 }

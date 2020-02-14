@@ -3,7 +3,9 @@ import { prisma } from "../../../../generated/prisma-client";
 export default {
   Query: {
     seeFeed: async (_, __, { request, isAuthenticated }) => {
+      console.log("isAuthenticated?");
       isAuthenticated(request);
+      console.log("Yes isAuthenticated?");
       const { user } = request;
       const following = await prisma.user({ id: user.id }).following();
       return prisma.posts({

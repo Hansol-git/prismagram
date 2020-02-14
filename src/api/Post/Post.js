@@ -16,7 +16,7 @@ export default {
         })
         .aggregate()
         .count(),
-    CommentCount: parent =>
+    commentCount: parent =>
       prisma
         .commentsConnection({
           where: { post: { id: parent.id } }
